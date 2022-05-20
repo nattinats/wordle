@@ -71,5 +71,12 @@ body {
 }
 
 .message-container {
-  height: 30px;
+  height: 320px;
+}
+
+.message-container p {
+  background-color: aquamarine;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0;
 }

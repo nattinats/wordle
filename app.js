@@ -1,5 +1,6 @@
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.key-container')
+const messageDisplay = document.querySelector('.message-container')
 
 
 const wordle = 'SUPER'
@@ -73,12 +74,63 @@ keys.forEach(key => {
 
 const handleClick = (letter) => {
   console.log('clicked', letter)
+  if (letter === '«') {
+    deleteLetter()
+    console.log('guessRows', guessRows)
+    return
+  }
+
+  if (letter === 'ENTER') {
+    checkRow()
+    console.log('guessRows', guessRows)
+    return
+  }
+  
   addLetter(letter)
+  console.log('guessRows', guessRows)
 }
 
 const addLetter = (letter) => {
+  if (currentTile < 5 && currentRow < 6 ) {
+
   const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
   tile.textContent = letter
+  guessRows[currentRow][currentTile] = letter
+  tile.setAttribute('data', letter)
   currentTile++
+  
+
+  }
+
+}
+
+
+const deleteLetter = () => {
+  if (currentTile > 0) {
+  currentTile--
+  const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
+  tile.textContent = ''
+  guessRows[currentRow][currentTile] = ''
+  tile.setAttribute('data', '')
+}
+}
+
+
+const checkRow = () => {
+  const guess = guessRows[currentRow].join('')
+
+  if (currentTile === 5) {
+    console.log('guess is ' + guess, 'wordle is ' + wordle)
+    if (wordle == guess) {
+      showMessage('Magnificent!')
+    }
+  }
+}
+
+const showMessage = (message) => {
+  const messageElement = document.createElement('p')
+  messageElement.textContent = message
+  messageDisplay.append(messageElement)
+  setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
 
 }
