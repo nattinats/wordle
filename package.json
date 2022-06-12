@@ -1,0 +1,27 @@
+{
+  "name": "wordle",
+  "version": "0.0.1",
+  "description": "A Game of Wordle with the benefit of 2x API from RapidAPI.",
+  "main": "app.js",
+  "scripts": {
+    "start:backend": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nattinats/wordle.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nattinats/wordle/issues"
+  },
+  "homepage": "https://github.com/nattinats/wordle#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}
