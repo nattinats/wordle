@@ -14,8 +14,8 @@ const getWordle = () => {
   })
   .catch(err => console.log(err))
 }
-
 getWordle()
+
 const keys = [
   'Q',
   'W',
@@ -44,8 +44,7 @@ const keys = [
   'B',
   'N',
   'M',
-  '«',
-
+  '«'
 ]
 
 const guessRows = [
@@ -54,17 +53,17 @@ const guessRows = [
   ['', '', '', '', ''],
   ['', '', '', '', ''],
   ['', '', '', '', ''],
-  ['', '', '', '', ''],
+  ['', '', '', '', '']
 ]
 
 let currentRow = 0
 let currentTile = 0
 let isGameOver = false
 
-guessRows.forEach((guessRow,guessRowIndex) => {
+guessRows.forEach((guessRow, guessRowIndex) => {
   const rowElement = document.createElement('div')
   rowElement.setAttribute('id', 'guessRow-' + guessRowIndex)
-  guessRow.forEach((guess,guessIndex) => {
+  guessRow.forEach((_guess, guessIndex) => {
     const tileElement = document.createElement('div')
     tileElement.setAttribute('id', 'guessRow-' + guessRowIndex + '-tile-' + guessIndex)
     tileElement.classList.add('tile')
@@ -86,6 +85,7 @@ keys.forEach(key => {
 
 
 const handleClick = (letter) => {
+  if (!isGameOver) {
   console.log('clicked', letter)
   if (letter === '«') {
     deleteLetter()
@@ -101,6 +101,7 @@ const handleClick = (letter) => {
   
   addLetter(letter)
   console.log('guessRows', guessRows)
+}
 }
 
 const addLetter = (letter) => {
@@ -131,28 +132,38 @@ const deleteLetter = () => {
 
 const checkRow = () => {
   const guess = guessRows[currentRow].join('')
-
+  console.log('guess', guess)
   if (currentTile > 4) {
-    console.log('guess is ' + guess, 'wordle is ' + wordle)
-    flipTile ()
-    if (wordle == guess) {
-      showMessage('Magnificent!')
-      isGameOver = true
-      return
-     } else {
-        if (currentRow >= 5) {
-          isGameOver = false //should be true, I fix this at the end :)
-          showMessage('Game Over')
+    fetch(`http://localhost:8000/check/?word=${guess}`)
+    .then(response => response.json())
+    .then(json => {
+      console.log(json)
+      if(json == 'Entry word not found') {
+        showMessage('word not in list')
+        return
+      } else {
+        console.log('guess is ' + guess, 'wordle is ' + wordle)
+        flipTile()
+        if (wordle == guess) {
+          showMessage('Magnificent!')
+          isGameOver = true
           return
+         } else {
+            if (currentRow >= 5) {
+              isGameOver = true //should be true, I fix this at the end :)
+              showMessage('Game Over')
+              return
+            }
+            if (currentRow < 5) {
+              currentRow++
+              currentTile = 0
+            }
+          }
         }
-        if (currentRow < 5) {
-          currentRow++
-          currentTile = 0
-
-        }
-      }
+    }).catch(err => console.log(err))
     }
   }
+  
 
 
 const showMessage = (message) => {
@@ -175,7 +186,7 @@ const flipTile = () => {
   const guess = []
 
   rowTiles.forEach(tile => {
-    guess.push({ letter: tile.getAttribute('data'), color: 'grey-overlay'})
+    guess.push({letter: tile.getAttribute('data'), color: 'grey-overlay'})
   })
 
   guess.forEach((guess, index) => {
