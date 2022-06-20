@@ -24,7 +24,6 @@ app.get('/word', (req, res) => {
   }).catch((error) => {
     console.error(error)
   })
-
 })
 
 
