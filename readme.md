@@ -1,6 +1,6 @@
 # Wordle in JavaScript
 
-A game of Wordle with the benefit of two different API's at RapidAPI.
+A game of Wordle built using [the Word Dictionary from Rapid API](https://rapidapi.com/twinword/api/word-dictionary/)
 
 Inspired by Ania Kubow.
 
