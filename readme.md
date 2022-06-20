@@ -1,4 +1,4 @@
-# Wordle
+# Wordle in JavaScript
 
 A Game of Wordle with the benefit of 2x API from RapidAPI.
 
@@ -10,3 +10,5 @@ Inspired by Ania Kubow.
 npm install
 npm run start
 ```
+
+
