@@ -1,6 +1,6 @@
 # Wordle in JavaScript
 
-A Game of Wordle with the benefit of two different API's at RapidAPI.
+A game of Wordle with the benefit of two different API's at RapidAPI.
 
 Inspired by Ania Kubow.
 
