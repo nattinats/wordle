@@ -1,5 +1,6 @@
 # Keep secrets for ourselves
 .env
+.env-*
 
 # Don't send this mac-file
 .DS_Store
