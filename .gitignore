@@ -1,2 +1,8 @@
+# Keep secrets for ourselves
 .env
+
+# Don't send this mac-file
 .DS_Store
+
+# Don't send node modules to GitHub
+node_modules/
